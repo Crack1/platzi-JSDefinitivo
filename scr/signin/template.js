@@ -11,7 +11,7 @@ var signInForm = yo `<div class="col s12 m7">
                     Iniciar Session desde Facebook
                 </a>
                 <a class="btn btn-fb hiden-on-med-and-up">
-                    Iniciar Sesion
+                <i class="fa fa-facebook-official"></i>Iniciar Sesion
                 </a>
             </div>
             <div class="divider"></div>
