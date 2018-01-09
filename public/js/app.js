@@ -10897,10 +10897,11 @@ require('moment/locale/es');
 moment.locale('es');
 require('./homepage');
 require('./signup');
+require('./user-page');
 require('./signin');
 page();
 
-},{"./homepage":54,"./signin":60,"./signup":62,"moment":37,"moment/locale/es":36,"page":41}],57:[function(require,module,exports){
+},{"./homepage":54,"./signin":60,"./signup":62,"./user-page":64,"moment":37,"moment/locale/es":36,"page":41}],57:[function(require,module,exports){
 var yo = require('yo-yo');
 
 module.exports = function landing(box) {
@@ -11068,4 +11069,68 @@ var signUpForm = yo`<div class="col s12 m7">
 
 module.exports = landing(signUpForm);
 
-},{"../landing":57,"yo-yo":51}]},{},[56]);
+},{"../landing":57,"yo-yo":51}],64:[function(require,module,exports){
+var page = require('page');
+var header = require('../header');
+var title = require('title');
+var empty = require('empty-element');
+var template = require('./template');
+
+page('/:username', header, loadUser, (ctx, next) => {
+    var main = document.getElementById('main-container');
+    title(`Platzigram - ${ctx.params.username}`);
+    empty(main).appendChild(template(ctx.user));
+});
+
+async function loadUser(ctx, next) {
+    try {
+        ctx.user = await fetch(`/api/user/:${ctx.params.username}`).then(res => res.json());
+        next();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+},{"../header":53,"./template":65,"empty-element":29,"page":41,"title":50}],65:[function(require,module,exports){
+var yo = require('yo-yo');
+var layout = require('../layout');
+
+module.exports = function (user) {
+  var el = yo`<div class="container user-page">
+    <div class="row">
+      <div class="col s12 m10 offset-m1 l8 offset-l2 center-align heading">
+        <div class="row">
+          <div class="col s12 m10 offset-m1 l3 offset-l3 center">
+            <img src="${user.avatar}" alt="${user.username}" class="responsive-img circle" />
+          </div>
+          <div class="col s12 m10 offset-m1 l6 left-align">
+            <h2 class="hide-on-large-only center-align">${user.username}</h2>
+            <h2 class="hide-on-med-and-down left-align">${user.username}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        ${user.pictures.map(function (picture) {
+    return yo`<div class="col s12 m6 l4">
+            <a href="/${user.username}/${picture.id}" class="picture-container">
+              <img src="${picture.src}" class="picture" />
+              <div class="likes"><i class="fa fa-heart"></i> ${picture.likes}</div>
+            </a>
+            <div id="modal${picture.id}" class="modal modal-fixed-footer">
+              <div class="modal-content center">
+                <img src="${picture.src}" />
+              </div>
+              <div class="modal-footer">
+                <div class="btn btn-flat likes"><i class="fa fa-heart"></i> ${picture.likes}</div>
+              </div>
+            </div>
+          </div>`;
+  })}
+      </div>
+    </div>
+  </div>`;
+
+  return layout(el);
+};
+
+},{"../layout":58,"yo-yo":51}]},{},[56]);

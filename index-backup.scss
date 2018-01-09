@@ -1,7 +1,6 @@
-$secondary-color: #125688;
+$secondary-color:#125688;
 $platzigram-red: #f44336;
 @import "node_modules/materialize-css/sass/materialize.scss";
-@import "./loader";
 @mixin prefix($property, $value, $vendors: webkit moz ms o) {
     @if $vendors {
         @each $vendor in $vendors {
@@ -12,18 +11,9 @@ $platzigram-red: #f44336;
 }
 
 body {
-    background: #fafafa;
-    color: $secondary-color;
+    background-color: #fafafa;
+    color: #125688;
     font-family: Montserrat;
-}
-
-.btn.btn-flat {
-    background-color: transparent;
-    box-shadow: none;
-}
-
-.landing {
-    margin: 30px auto;
 }
 
 .iphone {
@@ -33,13 +23,6 @@ body {
 .site-footer {
     text-transform: uppercase;
     font-size: 12px;
-}
-
-.loader-container {
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .login-box,
@@ -69,7 +52,7 @@ body {
 
 .signup-form .btn.btn-fb {
     background-color: #4090db;
-    font-size: .8em;
+    font-size: .9em;
 }
 
 .signup-form .btn.btn-fb:hover {
@@ -91,8 +74,11 @@ body {
     padding: 30px 0;
 }
 
-$avatar-size: 48px;
-$avatar-size-big: 150px;
+.landing {
+    margin: 30px auto;
+}
+
+$avatar-size :48px;
 .avatar {
     width: $avatar-size;
     height: $avatar-size;
@@ -101,12 +87,8 @@ $avatar-size-big: 150px;
     margin-right: 12px;
 }
 
-.card .username {
-    color: $secondary-color;
-}
-
 .card small.time {
-    line-height: $avatar-size;
+    line-height: $avatar-size
 }
 
 .card p {
@@ -122,12 +104,16 @@ $avatar-size-big: 150px;
     font-size: 30px;
 }
 
-.fa-heart-o {
+.card .fa-heart-o {
     color: $secondary-color;
 }
 
-.fa-heart {
-    color: $platzigram-red;
+.card .username {
+    color: $secondary-color;
+}
+
+.card .fa-heart {
+    color: #f44336;
     display: none;
 }
 
@@ -164,7 +150,7 @@ $avatar-size-big: 150px;
     }
 }
 
-.user-page {
+user-page {
     margin-top: 30px;
     .heading {
         margin-bottom: 20px;

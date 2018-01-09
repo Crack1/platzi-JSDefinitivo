@@ -34,6 +34,13 @@ app.get('/signup', (req, res) => {
         title: 'Platzigram Signup'
     });
 });
+
+app.get('/signin', (req, res) => {
+    res.render('index', {
+        title: 'Platzigram Signin'
+    });
+});
+
 app.get('/signin', (req, res) => {
     res.render('index', {
         title: 'Platzigram Signin'
@@ -72,6 +79,34 @@ app.post('/api/pictures', (req, res) => {
         }
         res.send("File Uploaded");
     })
+});
+
+app.get('/api/user/:username', (req, res) => {
+    const user = {
+        username: 'Erwin Vides',
+        avatar: "https://www.ecured.cu/images/thumb/0/08/Squirtle1.png/260px-Squirtle1.png",
+        pictures: [{
+            id: 1,
+            src: "https://cdn3.computerhoy.com/sites/computerhoy.com/files/editores/user-152/vegeta-dragon-ball-super-122.jpg",
+            likes: 12
+        }, {
+            id: 2,
+            src: "https://i1.wp.com/herosfact.com/wp-content/uploads/2017/12/Dragon-Ball-Super-122-Vegeta-vs-Jiren-e1514101532786.jpg?resize=510%2C299&ssl=1",
+            likes: 45
+        }, {
+            id: 3,
+            src: "https://dragonball.today/wp-content/uploads/sites/2/2018/01/hqdefault-282-480x300.jpg",
+            likes: 12
+        }]
+    }
+
+    res.send(user);
+});
+
+app.get('/:username', (req, res) => {
+    res.render('index', {
+        title: 'Platzigram Username'
+    });
 });
 
 

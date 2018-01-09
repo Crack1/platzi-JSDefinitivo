@@ -1,0 +1,1318 @@
+use 
+    npm install --save-dev babel-core 
+when you try to execute gulp and you are using browserify and babelify 
+
+
+browserify will recursively analyze all the require() calls in your app in order to build a bundle you can serve up to the browser in a single <script> tag.
+
+Babel.js es un transcompilador que nos permite convertir nuestro código de JavaScript ES6 en código de ES5. Esta característica se esta convirtiendo en algo crítico para mucha gente ya que las nuevas características de ES6 hacen deseable trabajar con el lenguaje lo antes posible.
+
+Gulp es una herramienta, en forma de script en NodeJS, que te ayuda a automatizar tareas comunes en el desarrollo de una aplicación, como pueden ser: mover archivos de una carpeta a otra, eliminarlos, minificar código, sincronizar el navegador cuando modificas tu código, validar sintáxis y un largo etcétera
+
+.map() se ejecuta por cada uno de los elementos de un array
+
+classlist.toggle -> si tiene la clase se la saca si no la tiene la agrega
+document.getElementById('fileName').classList.toggle('hide');
+
+
+Heroku
+heroku --help
+heroku login
+heroku keys:add
+heroku keys
+ssh -v git@heroku.com
+
+Push all
+git add .
+git commit -m "Setup start script in heroku"
+heroku create
+git push heroku
+heroku open
+
+
+npm run test-watch
+
+
+Contraseña: cosasgratis
+
+
+
+CURSO DEFINITIVO DE JAVASCRIPT
+======================================
+
+-------------------------------------------
+INICIALIZANDO NUESTRO PROYECTO CON NPM
+
+
+app.listen(3000, function (err) {
+	if (err) return console.log('Hubo un error'), process.exit(1);
+})
+
+Si hay algun error y tenemos que hacer un exit en nuestro proceso, siempre es bueno terminarlo con process.exit y por parametro algo 
+diferente a 0 para que sepa que es error.
+
+
+
+-------------------------------------------------
+PACKAGE BUNDLING CON GULP, BROWSERIFY Y SASS
+
+
+Ensambladores de packages 
+
+browserify => nos permite agarra el codigo nuestro y relacionarlo con las dependencias y nos da como resultado final solo un archivo 
+de js
+
+webpack => nos permite agregar transformaciones a nuestro codigo cada vez que hagamos un require, por ejemplo detecta un archivo 
+.coffee y lo pasa a js
+
+
+Automatizadores
+
+Grunt => automatiza tareas y tiene un grunt file donde esta toda su configuracion
+
+Gulp => tiene su gulp file y alli no es tan generalizada la configuracion, si no que mas detallada y perzonalizable
+
+
+Preprocesadores
+
+Sass
+Less
+Stylus
+
+
+"dependencies": {
+    "express": "^4.13.4"
+}
+
+ el ^ respeta el 4 y no lo deja subir, esto es por semver, ver mas en:  http://semver.org/
+ 
+ 
+ npm i --save gulp-rename  => para poder renonbrar el index.css que genera automaticamente gulp qal compilar mi .scss
+
+
+---------------------------------
+AGREGANDO VISTAS CON PUG
+
+Recordando que estamos construyendo una single web application, necesitamos de un motor de templates 
+( en este caso usaremos Jade / pug ) que justamente nos ayuda a crear diferentes fragmentos de HTML correspondientes a cierta 
+funcionalidad. Dicha funcionalidad o vista va a ser llamada o requerida desde JavaScript (al igual que sus estilos).
+
+
+
+------------------------------------------------
+ORGANIZANDO NUESTROS ASSETS Y AGREGANDO UN FAVICON
+
+
+para acceder a los archivos dentro se assets con gulp, seria con lon nombres de los archivos pero en realidad es glob y los glob son 
+como expresiones regulares para apuntar a archivos
+
+
+
+----------------------------------------
+AGREGANDO JAVASCRIPT EN EL CLIENTE
+
+no vamso a usar bebel como tal sino babelify que nos permite usar bebel dentro de browserify
+
+folder src igual a lib dodne estara codigo js del cliente
+
+
+npm i vinyl-source-stream para usar gulp-source
+
+gulp-source nos hace una transformacion de lo que nos mando bundle() de browserify para que lo entienda gulp  
+
+
+---------------------------------------
+AGREGANDO NAVEGACIÓN CON PAGE.JS
+
+
+Uno de los elementos por lo que se distingue un single page application es la navegación. Muy similar a las rutas de express, 
+page.js nos ayuda a crear esta funcionalidad desde el lado del cliente. 
+}
+
+
+
+---------------------------------------------
+AGREGANDO INTERFACES DE USUARIO CON YO-YO
+
+
+Yo-yo sigue un poco la filosofía de React (Orientado a componentes) : Nos ayuda a trabajar con templates y volverlos objetos 
+del DOM, además, de actualizarlos según se requiera, muy sencillo y del lado del cliente. También usaremos los Templates Strings, 
+funcionalidad que ganamos gracias a ECMAScript 6.
+
+
+
+
+------------------------------------
+MODULARIZANDO NUESTRO PROYECTO
+
+Parte de hacer buen código en JavaScript es modularizar cada funcionalidad. Para convertir cada archivo js en un módulo usamos 
+module.exports, y para usar dicho módulo en otra parte de nuestra aplicación usamos requiere (Si, justo como las librerías 
+importadas con NPM).
+
+
+module.export es una variable de javascript que permite organizar el codigo en modulos
+
+
+
+
+
+-----------------------------------
+AGREGANDO LA PÁGINA DE /SIGNIN
+
+var landing = require('../landing');
+
+
+la variable landing toma el valor que exporta el modulo landing
+
+
+
+--------------------------------------------------------
+AGREGANDO LAS IMÁGENES DE LOS USUARIOS AL TIMELINE
+
+map() no es un foreach() ya que foreach() no devuelve otro array como si lo hace map(), foreach() solo me permite ejecutar 
+funciones sobre un array
+
+
+
+
+
+--------------------------------------
+AGREGANDO LA FUNCIONALIDAD DE LIKE
+
+
+Todas las funcines tienen .bind() que sirve para cambiar el this de la funcion 
+
+
+
+
+---------------------------------------
+AGREGANDO LA FECHA DE PUBLICACIÓN
+
+
+
+var moment = require('moment');
+require('moment/locale/es');
+moment.locale('es');
+
+
+
+
+----------------------------------------------------------
+UTILIZANDO FORMATJS PARA INTERNACIONALIZAR LOS TEXTOS
+
+
+si quiero utilizar propiedades que tengan espacios solo las ponemos en corchetes
+
+
+MESSAGES['esto esta en ingles']
+
+MESSAGES.en-US === MESSAGES['en-US']
+
+
+
+
+--------------------------------------------------------
+OBTENIENDO UNA RESPUESTA DEL SERVIDOR CON SUPERAGENT
+
+
+Middleware tiene un parametro next, y dependiendo si se cumple una function sigue ejecutando la next function o retorna el error
+
+
+
+----------------------------------------------------------
+OBTENIENDO UNA RESPUESTA DEL SERVIDOR CON ASYNC/AWAIT
+
+
+En la nueva especificacion de ecmascript 2016 , se implementa la sintaxis para poder usar try - catch en las peticones http,  ya 
+que esto no funcionaba en versiones anteriores porque lo que hacia era que al encontrar un error se detenia y paraba todo, no 
+respetando el asincronismo.
+
+Estas 3 son lo mismo,la ultima forma funciona porque solo es 1 parametro
+function(res) {}  ===  (res) => {}  ===  res => {}
+
+
+res => return res.json  ===   res => res.json  ==> function con una sola linea de ejecucion, por ende no hace falta poner el return
+
+
+async function asyncLoad (ctx, next) {
+	try {
+		/*await detiene la ejecucion del proceso hasta que se ejecuta la promesa y en caso de  erro lo manda al catch*/
+		ctx.pictures = await fetch('/api/pictures').then(res => res.json) /*return implicitamente por ser una linea de 
+		codigo*/
+		next();
+	} catch (err) {
+		return console.log(err);
+	}
+}
+
+
+------------------------------------------------------------
+AGREGANDO UN BOTÓN PARA SUBIR UNA NUEVA FOTO
+
+Form para poder procesar el archivo que hagamos upload, el atributo enctype="multipart/form-date" que debe llevar el form para 
+procesar un archivo
+
+
+-----------------------------------------------
+SUBIENDO LA FOTO A NUESTRO SERVIDOR WEB
+
+
+cuando estan¿mos haciendo un console.log() de n parametros, estos parametros tambien reciben el nombre de argumentos, entonces para 
+todas las funciones tenemos disponible la variavle arguments que es un array con todos los parametros recibidos console.log(arguments)
+
+multer nos proporciona métodos y herramientas para hacer el upload de la foto y poder grabarla en el disco duro
+
+
+
+
+------------------------------------------------
+STREAM 1: RESOLVIENDO EL PRIMER DESAFÍO
+
+
+Cuando refrescamos la ruta de perfil de usuario no la encuentra, porque esta ruta cuando entramos directamente o recargamos lo que hace
+es buscarla primeramente en el servidor y en el servidor no esta definida, si la definimos utilizando pagejs pero no del lado del 
+servidor.
+
+
+Obtenemos del servidor el nombre del usuario, fotos y enlace a imagen de avatar
+
+Definimos la ruta del lado del servidor que nos devuelva una pagina y esta página la va a requerir app.js que tiene toda la logica de 
+la app
+
+
+Primero se definen las rutas particulares y luego las rutas que son mas generales
+
+
+await se usa para hacer un llamado asincronico dentro de una function async
+fetch() recien cuando devuelva el resultado del servidor (no se queda esperando el resultado)
+devulve la ejecucion a este momento y se le pasa la ruta a la que se hara fetch y devuelve
+una promesa en formato json
+
+
+
+.bind()  ES5
+
+el .this dentro de la function no esta definido, por fuera de la function si lo esta, con el .bind(this) ya afuwera de la function se 
+lo estamos definiendo.
+
+
+class Persona {
+  constructor(nombre = '', amigos = []) {
+    this.nombre = nombre
+    this.amigos = amigos
+  }
+  
+  saludar() {
+    alert(`mi nombre es : ${this.nombre}`)
+  }
+  
+  listarAmigos () {
+    this.amigos.forEach(function(amigo) {
+      alert(`Hola soy  ${this.nombre} y soy amigo de ${amigo.nombre}`)
+    }.bind(this)) /* definiendo el this a esta function*/
+  }
+}
+
+
+
+---------------------------------------------------
+  STREAM 2: RESOLVIENDO EL SEGUNDO DESAFÍO
+  
+  
+  
+  PASSPORTJS 
+  JWT
+
+
+const lorena = new Persona('lorena')
+const carolina = new Persona('carolina')
+const dani = new Persona('dani', [lorena, carolina])
+
+dani.listarAmigos()
+
+
+
+
+.bind() ES5
+
+con arrow function el this dentro de la function esta seteado al objeto .this fuera
+de esta function
+
+
+class Persona {
+  constructor(nombre = '', amigos = []) {
+    this.nombre = nombre
+    this.amigos = amigos
+  }
+  
+  saludar() {
+    alert(`mi nombre es : ${this.nombre}`)
+  }
+  
+  listarAmigos () {
+    this.amigos.forEach(amigo => {
+      alert(`Hola soy  ${this.nombre} y soy amigo de ${amigo.nombre}`)
+    })
+  }
+}
+
+
+
+const lorena = new Persona('lorena')
+const carolina = new Persona('carolina')
+const dani = new Persona('dani', [lorena, carolina])
+
+dani.listarAmigos()
+
+
+.call()
+
+
+class Persona {
+  constructor(nombre = '', amigos = []) {
+    this.nombre = nombre
+    this.amigos = amigos
+  }
+  
+  saludar() {
+    alert(`mi nombre es : ${this.nombre}`)
+  }
+  
+  listarAmigos () {
+    this.amigos.forEach(amigo => {
+      alert(`Hola soy  ${this.nombre} y soy amigo de ${amigo.nombre}`)
+    })
+  }
+}
+
+
+
+const lorena = new Persona('lorena')
+const carolina = new Persona('carolina')
+const dani = new Persona('dani', [lorena, carolina])
+
+// call recibe como primer parametro cual va a ser el this dentro de la function saludar
+lorena.saludar.call(carolina)
+
+apply()
+
+aply y call son lo mismo solo que aplply recibe parametros en forma de arreglo ([1,2,'']) y call los recibe asi (this, '', 1, 2, 3, '')
+
+
+
+seguridad https gracias a https://letsencrypt.org/ es gratuito, encriptar contraseñas, json web tokens
+Let’s Encrypt is a free, SSL gratuitos para mi servidor
+
+
+---------------------------------------------------
+  STREAM 2: RESOLVIENDO EL SEGUNDO DESAFÍO
+
+
+  SERVER SIDE RENDERING => mejora optimizacion
+  
+  
+  
+  
+  ---------------------------------------------------------
+INTRODUCCIÓN Y ARQUITECTURA DE NUESTRO PROYECTO
+
+
+Platzigram frontend es el backend for frontend, que es una tecnica que se utiliza mucho en node y es esa parte de nuestro proyecto que
+se encarga de recibir las peticiones de afuera, las peticiones http de los clientes y servir el contenido, ya detras del backend for
+frontend viene lo que es el backend real que se encarga de la conexion a la db, tener las API como tal de la app 
+
+
+
+------------------------------------------------------------------------------------------------
+Cómo crear una cuenta de Amazon Web Services y configurar S3 ( Almacenamiento de Archivos )
+
+
+La plataforma donde haremos el deploy de nuestra aplicación será Amazon Web Services, la cual, incluye muchos servicios que van 
+desde infraestructura de servidores, almacenamiento de datos o archivos (S3) , dashboards, etc.  Crear una cuenta en Amazon implica 
+usar de una tarjeta de crédito, pero no te preocupes, no te genera cobro si no excedes los límites de prueba. 
+
+Configurar S3 es muy sencillo, tenemos la opción de crear un nuevo bucket, lo cual necesita: 
+El nombre del Bucket
+La región (entre que el centro de datos esté más cerca, es menos la latencia ) 
+
+En s3 podemos agregar carpetas o subir archivos desde la interfaz web, pero el mejor valor lo obtienes al usar el API y subir 
+esos archivos desde su aplicación. 
+
+
+Un bucket es el repositorio donde almacenaremos los archivos
+
+
+
+
+---------------------------------------
+Usando el SDK de Amazon Web Services
+
+En nuestro server.js es donde nuestro servidor esta haciendo todo el upload de los archivos utilizando el modulo multer e 
+implementando diskStorage para almacenar en el disco duro y lo que se hace es cambiar esto para que se guarde en s3. Esto se 
+puede hacer manual, utlizando el aws sdk haciendo toda la logica para interceptar o crear un custom storage o podemos utilizar 
+modulos que ya existen en npm.
+
+multer-s3 es un storage que ya se encarga de hacer todo el upload de nuestros archivos a s3.
+
+* Para eso necesitamos instalar el modulo aws-sdk que es el modulo oficilal para trabajar con el sdk de aws en node y multer-s3 
+que es el storage con el que vamos a trabajar
+
+    npm i aws-sdk multer-s3 --save
+
+* Para trabajar con aws necesitamos utilizar las credenciales de seguridad, es una buena practica que todas estas credenciales o
+palabras claves esten seteadas en variables de entorno de  nuestro sistema operativo y nunca dentro del codigo fuente. Por eso 
+creamos el config.js
+
+Una variable de entorno es una variable que esta creada dentro de la sesion de ejecucion que la aplicacion esta teniendo en este 
+momento, son variables que estan disponibles para diferentes apps que estan usando esta sesion y de esta manera no tenemos la
+necesidad de tener esta informacion quemada en nuestro codigo, si no que dependiendo nuestro entorno de ejecucion yo puedo cambiar
+mis llaves de entorno. Entonces a la hora de hacer deploy yo defino todas las variables de entorno en el script  de ejecucion de 
+mi app y de esta manera cuando yo actualizo alguna clave de seguridad, simplemente actulizo la variable de entorno, vuelvo y lanzo
+mi proceso y el obtendra la variable de entorno desde ahi.
+
+Setear variables 
+
+En amazon vamos a perfil -> security credentials -> diferentes tipos de credenciales disponibles -> accessKey
+
+Falta poder relacionar la url creada en s3 con la DB.
+
+
+
+
+--------------------------------------------------------------------
+Cómo agregar Standard ( Linter ) a nuestro código en JavaScript
+
+
+babel-eslint es un plugig para standard que reconoce la sintaxis de ecma6
+
+
+
+---------------------------------------
+Testing en JavaScript usando AVA
+
+TDD - Test-Driven Development
+
+AVA - test runner
+
+Test runner es una herramienta que me  permite escribir  y correr test para una app, hay muchos test runner como mocha, tape, 
+ava (reciente 2016), karma, jasmin
+
+Con AVA
+
+Muy orientado a features de js del futuro
+Compatible con ecma6, asi que test se pueden hacer con este
+Soporta async/awake
+Soporta promesas
+Test corren de manera concurrente lo que significa que aprovecha los diferentes cores del pc y corre diferenets procesos para cada 
+test
+Muy inspirado en Tap (test runner test)
+
+npm i --save-dev ava
+declararlo en package.json
+Folder test con archivo util-test.js - convencion "-test"
+
+npm i ava --save-dev
+
+script ava en package json "npm run ava"
+
+Ava busca por defecto los archivos en folder test
+
+
+* podemos definir cb y este recibe como param a t (por convencion) que son las aceptions o aserciones y las aserciones 
+  son los comandos que voy a correr para garantizar que el resultado que yo tengo de una ejecucion x es el esperado
+  
+* Async await 
+	- es una funcionalidad de ecma7
+	- es un sintax sugar o convencion de escribir la sintaxis para poder hacer funciones asincronas de manera mucho mas facil
+	- permite escribir codigo asincrono utilizando promesas de una manera que se ve como si fuera codigo secuencial
+	- await para esperar o resolver la promesa
+	
+	- para una asercion de comparacion utilizamos la funcion deepEqual(), la cual tiene en cuenta posicion, contenido, todo,
+	  el 2 parametro es el array que debera devolver y a comparar.
+	
+		t.deepEqual(tags, [
+                  'picture',
+    		  'awesome',
+    		  'platzi',
+	    	  'ava',
+   		  '100',
+   		  'yes'
+		  
+	- const utils = {
+  		// extractTags: extractTags
+  		// con ecma6 al tener una propiedad igual o con el mismo nombre al valor puedo evitar esta duplicidad
+  		extractTags
+	  }
+
+
+
+-----------------------------------------------------------------
+Uso de expresiones regulares para nuestras pruebas unitarias
+
+
+
+Las expresiones regulares nos ayudan bastante para coincidir o comparar los valores de cualquier valor de entrada.
+
+Regexr.com, es una herramienta que nos facilita saber qué reglas necesitamos para nuestra expresión regular. Esta regla, puede 
+ser configurada dentro de nuestro .match()
+
+Igualmente, normalizamos el flujo de datos recordando el método toLowerCase() .
+		
+if (text == null) return [] // con doble == validamos si es null e indefinido a la vez
+		
+		
+-------------------------------
+Introduccion a RethinkDB
+
+
+RethinkDB es una base de datos pensada para funcionalidades realtime. Por tener bases de JavaScript en su core, la hace bastante 
+compatible con proyectos bajo ese lenguaje. 
+
+
+Corre por defecto en el 8080 port y se puede ver la interfaz de administraci.on de la DB, tenemos el data explorer que es una 
+interfaz donde podemos utilizar ReQL que es el query language de RethinkDB.
+
+Los comandos de rethinkdb son encadenables
+
+Es una db noSQL pero puedo hacer relaciones 
+
+Una de las mayores ventajas que tiene RethinkDB es su administrador, donde puedes encontrar todas tus bases de datos, obtener 
+estadísticas de las mismas, y hacer consultas usando su sintaxis ReQL.
+
+La ventaja de la sintaxis de ReQL es que la sintaxis es muy similar a JavaScript, y lo resultados de todas las consultas que 
+se ejecuten desde el administrador se implementan igual desde node.js. 
+
+
+Instalacion en windows => C:\Users\TuUsurio\RethinkDB\>rethinkdb.exe
+
+
+
+
+
+
+
+-------------------------------------------------------------
+Accediendo a nuestra base de datos Rethinkdb desde Node.js
+
+
+
+
+* Acceder a nuestra base de datos de muy fácil gracias a la API de RethinkDB. Lo primero que necesitamos estructurar son las 
+opciones de host, port y nombre de la base de datos. 
+
+* Después, la conexión puedes hacerla con callback o con promesas, esta segunda opción es la que recomendamos. 
+
+* Para mejorar el flujo-control de nuestra aplicación, usaremos co, mejorando la sintaxis y teniendo en cuenta yield para pausar 
+la ejecución hasta que se resuelva la promesa.
+
+* Podríamos utilizar async await para tener el flujo secuencial de toda la conexión pero en este caso para esta versión de node no 
+tenemos async await ni utilizaremos babel. Entonces utilizamos CO que funciona similar a async await y hace resolución de promesas 
+de manera secuencial, me permite hacer el intermedio entre lo que es utilizar promesas y utilizar finalmente async await. Finalmente 
+async await es simplemente sintax sugar o mejora sintactica a utilizar promesas con functions generator,los function generator son 
+un nuevo tipo de funciones en ecma2015, donde puedo pausar la ejecución de la función hasta que llame next a esa función y se siga 
+ejecutando con la palabra clave yield. Entonces hay librerías como CO que son hacks sobre functions generator que permiten 
+aprovecharse de esa funcionalidad de pausa de funciones para implementar API's asíncronas de manera secuencial, asi que CO me 
+permite simular esta funcionalidad de async await pero utilizando function generator en vez de async y yield en vez de await, 
+ya después al momento de implementar async await es solo remplazar las palabras y tipo de función.
+
+* Sobreescribimos la clase Promise que tiene por defecto ECMAScript por una librería llamada bluebird, permitiendo conectarnos 
+como callback o como promesa (Interfaz híbrida) a nuestra clase. 
+
+* run(conn) es como darle click a run en el dataexplorer de rethinkDB y es necesario ponerlo siempre que escribamos un comando de
+rethinkDB en nodejs.
+
+* Bluebird a parte de ser una implementacion del estandar promise de javascript, me permite tener ciertos metdos extra para trabajar
+con otros feaxtures, por ejemplo implementar una function que sea hibrida (si devuelve una promesa cuando no tiene cb o si tiene cb
+devolverla como tal).
+
+* Esto es una ventaga de bluebird, que me permite definir metodos hibridos que reciban cb para funcionar con el esquema normal de 
+node o metodos completamente asincronos utilizando promesas
+
+// Sobreescribimos Promise nativo de js pata utilizar la que viene con bluebird
+    const Promise = require('bluebird')
+
+
+Probando en el REPL por consola
+
+    var Db = require('./lib/db')
+    var db = new Db()
+    
+    // Probando conexion creada como callback
+    db.connect(function (err,c){console.log(c)})
+    
+    // Probando conexion creada con promise
+    db.connect().then((c) => {console.log(c)})
+    
+    De ambos modos devuelve lo mismo y si tenemos una interfaz hibrida
+
+
+
+
+----------------------------------------------------------------------
+Creación de test para RethinkDB y almacenamiento de ruta de imágenes
+
+
+
+
+Utilizamos la lib uuid-base62 para generar una db diferente o aleatorias
+
+
+function generator()
+test asincrono
+crear y borrar db para test
+hooks de ava test
+	test.before()
+	test.after()
+	test.after.always()
+	
+Vamos a crear un test que soporte tanto la conexión a base de datos, como el almacenamiento de una imagen. Para ello, necesito 
+agregar una librería de creación de IDs que dará nombres únicos e identificados a nuestras bases de datos de pruebas que instaciamos. 
+
+Por cierto, este test será asíncrono, tendrá una nueva aserción llamad t.is, para asegurarnos que contendrá los métodos que esperamos
+y un mensaje de feedback que nos diga que la base de datos se conecta/desconecta correctamente. 
+
+
+
+
+
+--------------------------------------------------------
+Almacenamiento de rutas de imágenes en RethinkDB
+
+
+
+
+Primero una acotación, no vamos a guardar directamente nuestras imágenes en RethinkDB,  sería algo contraproducente almacenar un 
+binario (imagen) debió a su capacidad realtime.
+
+ Lo que si vamos a almacenar, es precisamente la URL de donde estará almacenada esa imagen, que de hecho, será por medio de 
+ Amazon S3, aquí nos enfocamos en entender cómo será esa inserción a nuestra base de datos con node, mediante los métodos .table() 
+ y .insert()  respectivamente. 
+ 
+ Creación de coorutina
+ 
+ 
+ 
+ 
+ ----------------------------------------------------
+ Completando el test para nuestro objeto imagen
+ 
+ 
+* Estamos haciendo testing de cada funcionalidad de nuestra aplicación, en el capítulo anterior, vimos como nuestro modelo de una 
+imagen contiene una URL, una descripción, “Hastags” o categorías, número de likes y el ID del  usuario. Vamos a hacer una aserción
+en nuestro test para cada uno de esos campos de nuestro modelo.
+ 
+* Add properties description, tags (use module utils) and public_id (encode() with library uuid)
+
+* Update field con rethinkDb
+ 
+
+
+
+-------------------------------------------------------------
+Creación de un fixture para test de petición de imágenes
+
+
+
+* Ya que comenzamos a tener muchos test, creamos archivo aparte para los fixtures. Por lo general los fixtures en testing son datos
+básicos con los cuales vamos a probar en nuestra db
+
+* Crear test para almacenar likes de imágenes, actualmente la propiedad de me gusta para la imagen son 2 campos, uno que es el numero
+de me gusta que tiene y el otro si ya se le hizo liked o no.
+
+* Duplicamos saveImage method y borramos lo de adentro de la coorutina
+
+* endode() method uuid
+
+
+
+
+---------------------------------------------------------------------
+Consulta de todas las imágenes de nuestra base de datos
+
+
+
+Listar tidas las imagenes con rethinkDB, en orden ascendente
+
+Refactor tests using hooks AVA beforeEach() / afterEach() and passing each test context
+
+add index para consulta de rethinkDB, optimizando el query
+
+creando context y pasandoselo acada test
+
+
+
+
+
+---------------------------------------------------------------------------------
+Buenas prácticas de creación de usuarios en Backend (Encriptación con Hash)
+
+
+La seguridad de los datos de nuestros usuarios debe ser prioridad en cualquier desarrollo que tengamos, existen muchas técnicas para 
+encriptarlos en nuestra base de datos, sin embargo, para este ejemplo, usamos una técnica llamada Hash justo al algoritmo “sha256”. 
+
+Incluimos un fixture que agregara todo el contexto necesario a nuestro test, y también, nos aseguramos de implementar nuestro método 
+en nuestros backend. 
+
+
+Almacenamiento de usuario
+
+Obtener datos que vienen del formulario de registro
+LLamar funcionalidad de guardar usuario, esta funcionalidad debe estar encargada de encriptar la contraseña (no las guardaremos en 
+db como texto plano) con una utilidad.
+
+Hay muchos algoritmos de encriptacion, pero usamos una técnica llamada Hash justo al algoritmo “sha256” que es bastante fuerte y 
+no tendremos problemas como con md5 y hash1.
+
+Node tiene un modulo de encriptografia, no vamos a necesitar instalar ningun package
+
+Encriptación con Hash
+
+REPL de Node
+
+crypto = require('crypto');
+
+// creamos un sha
+shasum = crypto.createHash('sha256')
+// actualizar con el valor a encriptar
+shasum.update('foo123')
+
+shasum.digest('hex')
+
+
+
+
+
+-----------------------------------------------------------------------------------
+Petición de un usuario desde base de datos
+
+* Creacion de metodo para obtener user
+
+* Sucede con Rethink DB que como en las pruebas estamos creando los indices  e inmediantamente estamos haciendo las opereciones, 
+los indices se pueden tomar un tiempo de creacion en la DB para que aplique a todos los datos existentes en la DB
+
+* .get de rethink DB solo me deja consultar por primary key que es el id automatico que asigna rethinkDB
+
+* indexWait() de rethinkDB Espera a que los indices estén listos.
+
+
+
+
+
+
+-----------------------------------------------------------
+Autenticación de usuario mediante password
+
+
+
+
+
+
+
+
+
+---
+Control de errores mediante excepciones (Try, Catch, Throws )
+
+
+Refactor de clase DB para agregar manejo de errores
+
+Refactor de la function likeImages, utilizando dentro de ella el metodo ya existente getImage. Asi que se remplaza las consultas 
+directas a la db y se remplazan por getImage(id). De esta manera esta el refactor y si la coorutina lanza error se lo pasa a la 
+promesa que resuelve, asi que el error ya esta siendo manejado correctamente.
+
+Utilizamos try catch ya que como utilizamos generator functions pues todos los errores que peudan ser lanzados dentro de un yield,
+los puedo capturar con try catch
+
+
+
+
+
+---
+Consulta de imágenes en relación a nombre de usuario
+
+
+
+
+* Listar fotos por username
+
+* Queremos obtener sólo las imágenes creadas por cierto usuario. Para ello, primero hacemos la consultas de todas las imágenes 
+disponibles y indexamos por el userID que esperamos. Por ser un arreglo, tendremos que considerar múltiples promesas.
+
+* Entonces, mediante rethinkDB, vamos a buscar todas las imágenes .getAl l() , usando como index el userID, y ordenando esos 
+resultados de manera descendente.
+
+* Crear indice userId que permita varios registros con el mismo indice
+    `yield r.db(db).table('images').indexCreate('userId', { multi: true }).run(conn)`
+
+
+
+---
+Consulta de imágenes en relación a tag
+
+
+
+* Filtrar las imagenes donde el arreglo de imagenes contenga el tag.
+* Utilizamos filter de rethink Db con el metodo contains.
+*    let images = yield r.db(db).table('images').filter(img => {
+        return img('tags').contains(tag)
+      }).orderBy(r.desc('createdAt')).run(conn)
+
+
+
+ ---
+ Preparando nuestro módulo para microservicios
+ 
+ 
+ setup()
+ 
+ cada vez que nos conectamos a la DB siempre hacemos el proceso de setup (verificando existencia de indices, de dbs) y probablemente
+ esto no sea muy optimo a la hora de utilizar este modulo en produccion, ya que cuando se trabaja en produccion ya vamos a trabajar
+ con una DB previamnete existente, ya garantizamos que estos indices existan, entonces no hay necesidad de entrar en todo este proceso,
+ que es muy util para pruebas o cuando se configura la DB por primera vez.
+ 
+ Agregamos un check para verificar si vamos a configurar la DB o no
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ---
+ ## Modulo del API de la APP
+ 
+ 
+ 
+ 
+ 
+ 
+ ---
+ Introducción a los Microservicios
+ 
+ 
+ * Recordando un poco la estructura de nuestra aplicación, hemos terminado con el primer bloque (Platzigram Database) 
+ y continuaremos con el API, pero: ¿Porqué está dividido en bloques?, porque estamos implementando algo llamado microservicios.
+
+* Dependiendo del tamaño de las aplicaciones, nosotros podemos separar las interacciones de nuestra solución en diversos
+módulos independientes entre sí, quiere decir, si una parte de tu aplicación falla, esto no va a tirar o romper todas las demás.
+
+* De manera inherente, aprendemos a crear aplicaciones escalables y modulares.
+
+* Una librería que nos ayudará como orquestador de nuestros microservicios se va a llama micro por zeit.
+
+* Creando el proyecto desde cero, vamos a incluir lo que anteriormente hemos usado: Un linter, test unitario (con AVA y test-listen)
+y lo nuevo, la base de cómo se instancia un microservicio.
+ 
+ * TEST para probar micro
+ * libreria micro 
+ * libreria test-listen => para hacer testing de microservicios con micro
+ * libreria request-promises => para hacer http request utilizando promises, la libreria mas utilizada en nodejs para hacer http 
+ request es request, pero esta se implementa con callbacks.  Asi que utilizamos request-promises que es de la misma organizacion. 
+ * mock de microservicio corriendo, por el momento no estamos creando el microservicio en un archivo por aparte si no en el mismo test
+ * como utilizamos async await no necesitamos coorutinas y ak igual que en el modulo de db, creamos unservidor cada vez que corra 
+ un test
+ * Con AVA  puedo definir los test sin necesidad de definir que es lo que hace el test, esto para tener el test pendiente y que 
+ todabia no se ha implementado
+ * Instalar dependencias - micro necesita de babel-runtime para que corra sin problemas
+ 
+ 
+ 
+ 
+ ---
+ Creación de rutas para microservicios
+ 
+ 
+ 
+ Creacion de microservicio para manejo de imagenes
+ 
+ 3 rutas
+ 
+ 1. consultar imagen por id
+ 2. almacenar imagen
+ 3. dar like a imagen
+ 
+ * Vamos a necesitar multiples rutas para un mismo concepto o microservicio.
+ 
+ * En micro no existe el concepto de middleware como tal, dado que es una microlibreria es algo muy basico, solo se va a encargar 
+ de practimante de un solo midleware o ruta, asi que no tenemos una forma de tener un motor de rutas para micro. 
+ Por eso utilizamos http-hash modulo para definir las rutas o el tipo de rutas que queremos y dentro del midleware o del request 
+ listen basico de micro ver que funcion vamos a ejecutar a partir de la ruta que nos esta llegando en la peticion.
+ 
+ * Empezamos a implementar el microservicio utilizando micro, asi que creamos archivo pictures.js
+ 
+  let method = req.method
+  let url = req.url
+  
+  esto es igual a lo siguiente:
+  
+  // object structuring ecma6
+  let { method, url } = req
+ 
+ * try catch forma de controlar errores en async await
+ 
+ * Ya con esto tenemos un "framework"  como express, basico para generar rutas get y post facilmente, utilizando micro
+ 
+ * Importamos el microservicio creado y en vez de crear la funcion asyncrona en el archivo de test, simplemente le vamos a pasar 
+ lo que exporta micro y micro lo que exporta es una function en pictures
+ 
+ * AVA tiene un problema y es que no me permite importar modulos que tambien utilizen ecma6, de esta manera le diremos a AVA que 
+ corra utilizando el runtime de babel y de esta manera todo lo que el importa la va a poder transpilar
+ 
+* Sucede que los test estan corriendo sobre la db real, para solucionar esto utilizamos stubs que es una implementacion de DB 
+dummy, lo unico que queremos probar es que se llame a los metodos de la db y retornamos el objeto que queremos con los fixtures.
+ 
+ 
+ 
+ 
+ ---
+ Creción de nuestro endpoint POST /picture
+ 
+ 
+ Implementacion de los test en todo
+ 
+ Ruta para guardar una imagen
+ 
+ 
+ * En cada test vamos a necesitar de nuevo crear el servidor y obtener la url, asi que como vmaos a hacer diferentes test y queremos
+ correr los test de forma aislada y evitar tener que escribir la conexion al servidor + obtencion de url en cada uno utilizamos 
+ test.beforeEach() de AVA  para ejecutar codigo para cada uno de los test y de esa manera crear el servidor antes de c/u de los 
+ test y agregar la url al contexto. De esa manera ya esa url la puedo obtener del contexto de cada test.
+ 
+ * Request por defecto solo me retorna el body de la peticion, con la propiedad resolveWithFullResponse: true en las opciones 
+ del request, me devuelve todo el objeto de response (con state code y mas)
+ 
+ * En esta ruta los params de la url son opcionales, no son los que van a llegar en el json asi que queremos obtener la 
+ informacion que va a llegar en el request en el body, es decir la imagen json como tal, para eso **micro** aparte de la 
+ funcionalidad send() ofrece la funcion json que me permite extraer el body del request, asi que importamos json
+ 
+ 
+ 
+ 
+ 
+ ---
+ Creción de nuestro endpoint POST /picture/:id/like
+ 
+ 
+ 
+ 
+ * Metodo para hacer CLON de elementos en JS y consiste en volver la imagen u obj a un string y luego volverlo a parsear. 
+ Pero no es muy  recomendado cuando tengo objetos muy grandes, en este caso no hay lio.
+ 
+ 
+ 
+ ---
+Creción de nuestro endpoint GET /picture/list
+ 
+ 
+ Declaramos ruta GET/list antes de GET/:id para que conserve la presedencia 
+ 
+ 
+ 
+ ---
+ Creción de nuestro endpoint GET /picture/tag
+ 
+ 
+ 
+ 
+ ---
+ Creación de nuestro endpoint POST /user
+ 
+ Omitir errores de standard lint:
+ 
+ 
+ 
+ 1. Este -- en el comando **npm run lint -- --verbose** es para yo decirle que apartir del -- pueda pasarle argumentos al comando
+ ejecutado
+ 
+ 2. Con lo anterior obtengo la informacion de la regla que se esta rompiendo en este momento, en este caso es (no-unused-vars)
+ 
+ 3. Despues vamos a las lineas de los erroresy al final de la linea va: ** // eslint-disable-line no-unused-vars**
+ 
+ 4. Correr npm test nuevamente, no deberia haber problemas
+ 
+ 
+ 
+ ---
+ Creación de Tokens para nuestro API usando JSON Web Tokens
+ 
+ 
+ 
+ Asegurar rutas, que solo users authenticados accedan a estas rutas.
+ Implementar API token, creando libreria
+ 
+ JWT - estandar de seguridad
+ 
+ Utilizaremos el mecanismo del key secret compartido, es decir un secret key que conocera el front y back
+ 
+ Un JSWT consta de 3 partes
+ 
+ 1. Cabecera
+ 2. Info del token o payload
+ 3. Firma de verificación
+ 
+ 
+ Instalacion de dependencia jsonwebtoken
+ 
+ Creando utils.js y aqui adentro crearemos metodos async para poderlos utilizar dentro de nuestro midlware async con async await
+ 
+ Como utilizamos async await esperariamos que este modulo o toda esta logica retorne una promesa, pero jwt tiene 2 trabaja de 2 formas:
+ un metodo sincrono o uno asyncrono pero que  retorna un callback, entonces hay una forma en la que puedo ejecutar una funcion callback
+ asyncrona como tal dentro de una promesa.
+ 
+ - resolve: es la funcion que voy a ejecutar para resolver la promsea
+ - reject: es la funcion que voy a ejecutar si ocurre algun error
+ 
+ jwt.sign() => firma token
+ jwt.verify() => verifica token
+ 
+ 
+ 
+ ---
+ Limitando nuestros request esperando recibir un Token
+ 
+ 
+ 
+ Test que deberia fallar cuando no le pase token
+ 
+ Utilizando lib de tokens creada
+ 
+ Hay algo que debemos verificar en los test y es cuando cambia el payload del token
+ 
+ 
+ 
+ 
+ 
+ ---
+ Test de autenticación de usuario
+ 
+ 
+ Para esta ruta crearemos un microservicio
+ 
+ 
+ 
+ 
+ 
+ ---
+ Creación de nuestro cliente
+ 
+ 
+ 
+ Mygram client es una API wrapper es decir una libreria que me permite hacer una abstraccion de las peticiones http que voy hacer 
+ hacia una API de tal manera que yo no necesite consumir siempre una libreria para hacer peticiones http sino que yo utilizo una 
+ libreria con unos metodos definidos que me van a retornar los datos que quiero.
+ 
+ 
+ En este modulo no utilizaremos ecma6 como en los otros
+ Implementacion de mecanismo que permite la comunicacion entre el fronted y API => MyGram-client
+ 
+ 
+ Poder crear una clase que la devolvemos con una libreria que llamaremos mygram y esta libreria tendrá un metodo llamado 
+ **createClient()** que me va a entregar una instancia de la clase
+ 
+ Ya tenemos una clase que no hace nada, pero definimos los metodos con los que la clase trabajara 
+ 
+ 
+ 
+ ---
+ Implementando el perfil de usuario
+ 
+ 
+ 
+ 
+ 
+* Usaremos mocking de request http, entonces en c/u de los test crearemos un servidor falso que me va a definir la ruta y la respuesta
+de esa ruta y lo que busca es que la funcion que yo este ejecutando llame a esa ruta a traves de la peticion http que yo defino.Para 
+ello utilizaremos el modulo nock.
+
+* Dado que nuestro proyecto de API tiene diferentes microservicios corriendo (imagenes, users, auth), esto lo vamos a ver
+como 3 endpoints diferentes. Localmente si corremos esos microservicios c/u correra un servidor http en puertos diferentes,
+asi que necesitamos pasarle a nuestro cliente un mecanismo para poder definir programaticamente los endpoints, a la hora de
+lanzar a produccion no tendremos ese problema ya que todo esto va estar servido bajo ng-nix, osea vamos a tener una capa http
+que va ser la encargada de tener todos estos microservices vistos como un solo servicio a la web externa. Entonces haremos
+nuestra clase del cliente que sea configurable, que por defecto vaya a la ruta API que tendremos en produccion pero para
+poder probar necesitamos definir los diferentes endpoints como si fueran diferentes microservicios corriendo para garantizar
+que las peticiones se estan haciendo bien
+
+* Implementacion de metodos hibridos
+ 
+
+
+
+
+---
+Carga de imagenes desde nuestro cliente
+
+
+     // nock simulacion http
+     nock(options.endpoints.pictures, {
+        reqheaders: {
+          'Authorization': `Bearer ${token}`
+        }
+     })
+        .post('/', newImage)
+        .reply(201, image) // debera retornar 200 y la img creada
+	
+
+
+
+---
+Cómo implementar autenticación de usuarios con Passport
+
+
+
+Necesitamos que solo los usuarios autenticados de nuestra app tengan la capacidad de subir imagenes. Para esto debemos implementar
+un sistema o esquema de seguridad de nuestra app. Dado que en nuestro frontend estamos utilizando expressjs, hay una utilidad que
+sirve como miledware para express, para manejar el tema de autentificacion.
+
+Un middleware es una funcion que se encarga de ejecutarse en el medio entre el request que esta haciendo el cliente y la ruta como
+tal que estoy definiendo en la aplicacion.
+
+Definiremos unos sistemas de verificacion entre la peticion del cliente cuando va a intentar subir una foto y la ruta de subir foto,
+y en ese middleware voy a garantizar que el usuario esta autentificado. Utilizaremos un midleware llamado **Passport** que tiene
+bastante soporte de lo que son las distintas estrategias de autentificacion, podemos definir estrategias locales o custom, como por
+ejemplo una autentiificacion de usuario y contraseña basico sobre nuestra DB o implementar mas avanzadas como OAuth, con FB, GOOGLE
+etc.
+
+Implementaremos una estrategia de auth local donde utilizaremos la ruta auth de nuestra API para autenticar un user por username y
+password y mas adelante una estrategia de auth social con FB
+
+
+
+
+---
+Configurando un middleware en express
+
+
+
+Instalar aparte de passporjs una serie de miledwares de express que me van a permitir realizar todo lo que es manejo de session y
+gestion de cookies. Tambien como vamos a implementar 2 forms (registro y login) vamos a necesitar un middleware que me permita
+obtener los datos del POST de manera JSON en el body de mi app:
+
+body-parser => encargada de hacer el parse de la peticion http que me van a hacer a mi rutas de auth y registro
+cookie-parser => para almacenar los datos de session en una cookie, lo hace automaticamente passport pero esta es una dependencia
+express-session => me permite almacenar datos de la session del lado del servidor para luego ser referenciados con la cookie
+
+Le decimos a express que utilice estos middlewares antes de hacer el prosesamiento de las rutas y despues, antes de realizar todas las tareas de auth. En express los midlewares se ejecutan de manera secuencial, asi que es importante definir previamente cual es la ruta logica de ejecucion de los miledwares para poder llegar a la ruta final a la cual le quiero aplicar esta informacion.
+
+Definicion de middlewrae despues de la definicion de express
+
+configuracion inicial de los middlewares que necesita passport
+
+Instalacion y habilitacion de passportjs
+
+instalando estrategias a usar passport-local - passport-facebook
+
+
+
+---
+Estrategia de autenticación local (password / contraseña )
+
+
+
+
+Por defecto el cliente que instanciamos se conecta a rutas de produccion que todabia no tenemos en ese modo asi que en nuestro config.js crearemos rutas por defecto y en desarrollo
+
+* El name de los inputs en el form deben ser igual a los pedidos en el client
+
+* Para probar lanzamos microservicio de usuario, veremos como lanzarlos y especificar los puertos
+	- Abrimos una consola para c/u de los microservicios y vamos al directorio de mygram-api
+	- C:\Users\Daniel\Desktop\Todo\MyGram-api>micro -p 5000 pictures.js
+	- C:\Users\Daniel\Desktop\Todo\MyGram-api>micro -p 5001 users.js
+	- C:\Users\Daniel\Desktop\Todo\MyGram-api>micro -p 5002 auth.js
+	
+
+
+
+---
+Consulta, altas de usuarios y manejos de errores en autenticación
+
+
+
+
+Passport js me permite a mi definir middlewares y hay 2 funciones importantes que todo middleware utiliza
+
+	1. Serializar usuario => cuando hago auth debo obtener el objeto completo del usuario de algunam manera,
+	pero yo en session no guardo todo el usuario, sino simplemente una referencia del usuario. Asi que serializar
+	usuario me permite a mi coger todo el objeto completo de usuario y guardar una referencia. 
+	El proceso de deserializar un usuario es el inverso, pues yo tomo esa referencia de usuario que guarde
+	en session y obtengo el usuerio completo de la api o db.
+	
+	Vamos a exportar 3 metodos para esta funcion. (local-strategy, serilizeuser, deserializeuser) y le decimos en
+	server.js a passport que utilice estos 3 metodos.
+	
+	Done es el callback que llamamos cuando todo el proceso ya termino
+	
+
+* Creacion de rutas de auth para poder hacer login utilizando passportjs
+
+* Creamos una pequeña funcion que es un middleware que me va a permitir garantizar que el usuario fue autenticado, De esta manera
+si yo intento entrar a una ruta que esta protegida por este middleware el me va a decir que no estoy autenticado
+
+* El middlewrae que queremos asegurar es el de guardar imagen "POST /picture", entonces toda ruta en express recibe como primer
+argumento el nombre de la ruta y puede recibir como segundo argumento un middleware para que solo se ejecute para esa ruta
+
+
+
+
+
+---
+Autenticación con Facebook
+
+
+
+
+* Estas estrategias de auth social utilizan un sistema Oauth que me permite a mi pedirle permiso a un tercero en este caso FB, que verifuique o garantice que si soy un usuario registrado en esa plataforma y la plataforma devuleve a la app una serie de tokens o llaves que me van a permitir identificarme de ahora en adelante con la app. Nosotros recibimos esos token en una ruta a la cual llamamos callback, asi que passport js se encargara de validad esos tokens y verfificar si el user esta en la DB , o si vamos a configurar un user, lo que programemos se hara.
+
+* Para poder utilizar OAuth en la app debemos configurar unos parametros especiales, y para poder utilizar esos parametros especiales dependiendo del servicio con el cual voy a estar trabajando voy a requerir o no, por ejemplo una integracion en este servico. En el caso de FB si yo quiero permitir que una app, en este caso mygram utilice la auth de FB vamos al portal de developer de facebook
+
+* Passportjs tiene una convencion de definicion de objeto de perfil
+
+* Implementacion de la logica para la estrategia de autentificacion con fb
+
+---
+Creación de un token del API a partir de autenticación por Facebook
+
+
+* Implementando la estrategia creada para FB, para esto podemos crear una ruta /auth/facebook y utilizar la estrategia
+
+
+* Creamos variable para el servidor de express llamada PORT, y cambiamos del puerto 3000 al 5050 ya que tenemos configurado
+en nuestro config.js "	config.auth.facebook.callbackURL = 'http://mygramphoto.test:5050/auth/facebook/callback'
+" este puerto.
+
+* Agregamos al boton de FB en el sigin form el href a /auth/facebook y la propiedad rel="external" para que el utilice este enlace como un enlace real y no intente hacer navegacion entre el sistema de rutas de la primera parte del curso de javascript definitivo definidas con page js
+
+* Ejecutar la app como si fuera uno de los dominios que se configure en FB developers, para esto utilizamos el archivo HOST presente en los sistemas operativos, este archivo me permite hacer un mapeo entre IP's y nombre de dominios. En este caso haremos mapeo de nuestra ip local al nombre de dominio mygramphoto.test.
+
+* Es importante abrirlo como administrador 
+
+
+
+
+---
+Manejo de sesiones de usuarios
+
+
+
+* Nuestra logica de renderizado se hace toda en el cliente asi que debemos implementar una ruta que me diga que me diga quien es el user autenticado para poder mostrarlo en la GUI
+
+* En la vista del header creamos una authCard que es una funcion que recibe el contexto para obtener informacion. Y creamos 2 vistas, una para cuando el user esta autenticado y la otra cuando no. Una vez creada debemos crear un middleware que se ejecute siempre antes de que yo vaya a cargar el header. Este header inicialmente se carga en el homepage y tambien en la pagina de usuario. Tenemos un loadUser pero este trae es la info del usuario que estamos consultando asi que debemos hacer una peticion http a whoami para obtener el user logueado y para esto creamos un archivo de utilidad
+
+* Hacer logout utilizando passport, creamos nueva ruta en el servidor para logout y passport js me entrega un metodo logout() dentro del request
+
+---
+Consulta y alta de imagenes
+
+
+* Implementacion de metodo para subir las imagenes, es decir guardar ya la referencia de la imagen en la DB
+
+* Utilizamos gravatar, es un servicio que nos ofrece avatars globales por medio del email, el unico lugar donde tenemos el correo es en el cliente API cuando consultamos un usuario de la DB, asi que aqui implementamos el modulo de gravatar para obtener el avatar.
+
+* El modulo de gravatar me permite hacer la codificacion del email y obtener la url de gravatar con la imagen asi que la instalamos y utilizamos en el microservicio de users.
+
+* Borramos data dummy y llamamos al cliente
+
+* Al gravar una imagen estamos haciendo 2 pasos: subir la imagen a ws3, amazon nos retorna la url en la que quedo la imagen.
+Queremos guardar esa imagen ahora con la referencia del usuario para poder a futuro listar imagenes por user
