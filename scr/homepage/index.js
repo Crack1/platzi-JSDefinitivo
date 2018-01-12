@@ -6,16 +6,46 @@ var title = require('title');
 var request = require('superagent');
 var header = require('../header');
 var axios = require('axios');
-
+var webcam = require('webcamjs');
 
 
 
 page('/', header, asyncLoad, (ctx, next) => {
     title('Platzigram');
-
+    var main = document.getElementById('main-container');
     empty(main).appendChild(template(ctx.pictures));
 
+    $('.modal-trigger').leanModal({
+        ready: function () {
+            webcam.set({
+                width: 320,
+                height: 240,
+                dest_width: 640,
+                dest_height: 480,
+                image_format: 'jpeg',
+                jpeg_quality: 90,
+                force_flash: false
+            });
+            webcam.attach('#camara-input')
+        },
+        complete: () => {
+            webcam.reset();
+        }
+    })
+    //$('.modal-trigger').modal('open');
+
+
+
+
 });
+
+function loading(ctx, next) {
+    var el = document.createElement('div');
+    el.classList.add('loader');
+    main.appendChild(el);
+    next();
+
+}
 
 
 function loadPictures(ctx, next) {

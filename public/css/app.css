@@ -7091,6 +7091,13 @@ body {
     opacity: 0;
     filter: alpha(opacity=0); }
 
+#profile-photo-camera-preview,
+#profile-photo-camera-preview video {
+  width: 100% !important;
+  height: auto !important;
+  min-width: 100px;
+  min-height: 100px; }
+
 .user-page {
   margin-top: 30px; }
   .user-page .heading {

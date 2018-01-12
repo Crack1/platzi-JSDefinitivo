@@ -24,7 +24,7 @@ module.exports = function (user) {
               <div class="likes"><i class="fa fa-heart"></i> ${picture.likes}</div>
             </a>
             <div id="modal${picture.id}" class="modal modal-fixed-footer">
-              <div class="modal-content center">
+              <div class="modal-content">
                 <img src="${picture.src}" />
               </div>
               <div class="modal-footer">

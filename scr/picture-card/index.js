@@ -17,10 +17,10 @@ module.exports = function (pic) {
             <small class="right time">${moment(picture.createdAt).fromNow()}</small>
             <p>
                 <a class="left" href="#" onclick=${like.bind(null, true)}>
-                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    <i class="fa fa-heart-o heart-o" aria-hidden="true"></i>
                 </a>
                 <a class="left" href="#" onclick=${like.bind(null,false)}>
-                <i class="fa fa-heart" aria-hidden="true"></i>
+                <i class="fa fa-heart heart" aria-hidden="true"></i>
             </a>
                 <span class="left likes">${picture.likes} me gusta </span>
             </p>
@@ -29,13 +29,18 @@ module.exports = function (pic) {
     }
 
     function like(liked) {
+        // if (dblclick) {
+        //     pic.liked = !pic.liked;
+        //     liked = pic.liked;
+        // } else {
+        //     pic.liked = liked;
+        // }
         pic.liked = liked;
         pic.likes += liked ? 1 : -1;
         var newEl = render(pic);
         yo.update(el, newEl);
         return false;
     }
-
     el = render(pic);
     return el;
 

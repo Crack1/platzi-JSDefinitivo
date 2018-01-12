@@ -3,6 +3,8 @@ var multer = require('multer');
 var ext = require('file-extension');
 
 
+
+
 var app = express();
 
 
@@ -68,7 +70,9 @@ app.get('/api/pictures', (req, res) => {
         createdAt: new Date().setDate(new Date().getDate() - 10)
     }];
 
-    res.send(pictures);
+    setTimeout(() => {
+        res.send(pictures)
+    }, 2000);
 
 });
 

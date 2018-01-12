@@ -7,12 +7,28 @@ var request = require('superagent');
 
 module.exports = function (pictures) {
     var el = yo `<div class="container timeline">
+  
+    <!-- Modal Structure -->
+    <div id="modalCamara" class="modal center-align">
+      <div class="modal-content">
+        <div class="camara-picture center-align" id="camara-input"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="waves-effect waves-light btn" id="shoot">
+        <i class="fa fa-camera"></i>
+        </button>
+      </div>
+    </div>
+
     <div class="row">
         <div class="col s12 m10 offset-m1 l8 offset-l2 center-align">
             <form enctype="multipart/form-data" class="form-upload" id="formUpload" onsubmit=${onsubmit}>
+                <a class="waves-effect waves-light btn modal-trigger" href="#modalCamara">
+                    <i class="fa fa-camera"></i>
+                </a>
                 <div id="fileName" class="fileUpload btn btn-flat cyan">
                     <span>
-                        <i class="fa fa-camera" aria-hidden="true"></i> Subir Foto
+                        <i class="fa fa-cloud-upload" aria-hidden="true"></i> Subir Foto
                     </span>
                     <input name="picture" id="file" type="file" class="upload" onchange="${onchange}" />
                 </div>
