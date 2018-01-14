@@ -1,3 +1,6 @@
+Vray 2.0
+Sketch
+
 use 
     npm install --save-dev babel-core 
 when you try to execute gulp and you are using browserify and babelify 

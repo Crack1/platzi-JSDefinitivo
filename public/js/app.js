@@ -11840,16 +11840,33 @@ var request = require('superagent');
 var header = require('../header');
 var axios = require('axios');
 var webcam = require('webcamjs');
+var picture = require('../picture-card');
 
 page('/', header, asyncLoad, (ctx, next) => {
     title('Platzigram');
     var main = document.getElementById('main-container');
     empty(main).appendChild(template(ctx.pictures));
 
+    const picturePreview = $("#picture-preview");
+    const camaraInput = $("#camara-input");
+    const cancelPicture = $("#cancelPicture");
+    const shootButton = $("#shoot");
+    const uploadButton = $("#uploadButton");
+
+    function reset() {
+        picturePreview.addClass('hide');
+        cancelPicture.addClass('hide');
+        uploadButton.addClass('hide');
+        shootButton.removeClass('hide');
+        camaraInput.removeClass('hide');
+    }
+
+    cancelPicture.click(reset);
+
     $('.modal-trigger').leanModal({
         ready: function () {
             webcam.set({
-                width: 320,
+                width: 300,
                 height: 240,
                 dest_width: 640,
                 dest_height: 480,
@@ -11858,9 +11875,38 @@ page('/', header, asyncLoad, (ctx, next) => {
                 force_flash: false
             });
             webcam.attach('#camara-input');
+            shootButton.click(ev => {
+                webcam.snap(data_uri => {
+                    picturePreview.html(`<img src="${data_uri}"/>`);
+                    picturePreview.removeClass('hide');
+                    cancelPicture.removeClass('hide');
+                    uploadButton.removeClass('hide');
+                    shootButton.addClass('hide');
+                    camaraInput.addClass('hide');
+                    //el click se define cda vez que se toma foto se van agregando click con esto se resetea el evento para quitar los anteriores
+                    uploadButton.off('click');
+                    uploadButton.click(() => {
+                        const pic = {
+                            url: data_uri,
+                            likes: 0,
+                            lied: false,
+                            createdAt: +new Date(),
+                            user: {
+                                username: 'Erwin Vides',
+                                avatar: "https://www.ecured.cu/images/thumb/0/08/Squirtle1.png/260px-Squirtle1.png"
+                            }
+                        };
+                        $("#picture-cards").prepend(picture(pic));
+                        webcam.reset();
+                        reset();
+                        $("#modalCamara").closeModal();
+                    });
+                });
+            });
         },
         complete: () => {
             webcam.reset();
+            reset();
         }
     });
     //$('.modal-trigger').modal('open');
@@ -11910,7 +11956,7 @@ async function asyncLoad(ctx, next) {
     }
 }
 
-},{"../header":54,"./template":56,"axios":1,"empty-element":29,"page":41,"superagent":45,"title":50,"webcamjs":51}],56:[function(require,module,exports){
+},{"../header":54,"../picture-card":60,"./template":56,"axios":1,"empty-element":29,"page":41,"superagent":45,"title":50,"webcamjs":51}],56:[function(require,module,exports){
 var yo = require('yo-yo');
 var layout = require('../layout');
 var picture = require('../picture-card');
@@ -11922,11 +11968,18 @@ module.exports = function (pictures) {
     <!-- Modal Structure -->
     <div id="modalCamara" class="modal center-align">
       <div class="modal-content">
-        <div class="camara-picture center-align" id="camara-input"></div>
+        <div class="camara-picture" id="camara-input"></div>
+        <div class="camara-picture hide" id="picture-preview"></div>
       </div>
       <div class="modal-footer">
         <button class="waves-effect waves-light btn" id="shoot">
         <i class="fa fa-camera"></i>
+        </button>
+        <button class="waves-effect waves-light cyan btn hide" id="uploadButton">
+        <i class="fa fa-cloud-upload"></i>
+        </button>
+        <button class="waves-effect waves-light red btn hide" id="cancelPicture">
+        <i class="fa fa-times"></i>
         </button>
       </div>
     </div>
@@ -11951,7 +12004,7 @@ module.exports = function (pictures) {
         </div>
     </div>
     <div class="row">
-        <div class="col 12 m10 offset-m1 l6 offset-l3">
+        <div class="col 12 m10 offset-m1 l6 offset-l3" id="picture-cards">
             ${pictures.map(function (pic) {
         return picture(pic);
     })}

@@ -11,11 +11,18 @@ module.exports = function (pictures) {
     <!-- Modal Structure -->
     <div id="modalCamara" class="modal center-align">
       <div class="modal-content">
-        <div class="camara-picture center-align" id="camara-input"></div>
+        <div class="camara-picture" id="camara-input"></div>
+        <div class="camara-picture hide" id="picture-preview"></div>
       </div>
       <div class="modal-footer">
         <button class="waves-effect waves-light btn" id="shoot">
         <i class="fa fa-camera"></i>
+        </button>
+        <button class="waves-effect waves-light cyan btn hide" id="uploadButton">
+        <i class="fa fa-cloud-upload"></i>
+        </button>
+        <button class="waves-effect waves-light red btn hide" id="cancelPicture">
+        <i class="fa fa-times"></i>
         </button>
       </div>
     </div>
@@ -40,7 +47,7 @@ module.exports = function (pictures) {
         </div>
     </div>
     <div class="row">
-        <div class="col 12 m10 offset-m1 l6 offset-l3">
+        <div class="col 12 m10 offset-m1 l6 offset-l3" id="picture-cards">
             ${pictures.map(function (pic) { return picture(pic) })}
         </div>
     </div>
